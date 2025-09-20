@@ -5,7 +5,7 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # НАСТРОЙКИ
-BOT_TOKEN = "8299061655:AAE8I3f_wtaEwc9K3RpkeHgYswgTMr7kSfg"  # <- замените на ваш токен
+BOT_TOKEN = "your_token"  # <- замените на ваш токен
 DATA_DIR = "data"
 SCORES_FILE = os.path.join(DATA_DIR, "scores.txt")  # простой текстовый файл
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -194,3 +194,4 @@ def callback_handler(call):
 if __name__ == "__main__":
     print("Бот запущен...")
     bot.polling(none_stop=True)
+

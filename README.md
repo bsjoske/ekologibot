@@ -35,12 +35,4 @@ GitHub: https://github.com/Paranoid-kid/Image-Classifier-on-Telegram
 Шаблон деплоя на Heroku — если захотим, чтобы бот всегда работал в интернете, можно использовать этот пример.
 GitHub: https://github.com/AnshumanFauzdar/telegram-bot-heroku-deploy
 
-# Гайды-статьи, где есть полезная для меня информация
 
-How to Create a Telegram Bot using Python — большой и понятный урок, объясняет как начать и как отправлять сообщения.
-FreeCodeCamp: https://www.freecodecamp.org/news/how-to-create-a-telegram-bot-using-python/
-Коротко: научит делать /start, отправлять сообщения и понимать обработчики.
-
-Использование Telegram-бота для классификации изображений — статья с примером про фото, предобработку и модель.
-DEV Community: https://dev.to/ash11sh/using-telegram-bot-for-image-classification-3afk
-Коротко: полезно, если хотим, чтобы бот "сам понимал" что на фото.

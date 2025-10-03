@@ -18,7 +18,7 @@ WIN_THRESHOLD = 15
 
 # ВОПРОСЫ
 QUESTIONS = [
-    # НЕ СЕРЬЁЗНЫЕ (low)
+    # НЕ СЕРЬЁЗНЫЕ 
     {"id":1, "text":"Использование велосипеда вместо машины для коротких поездок", "class":"low"},
     {"id":2, "text":"Переход на электромобиль", "class":"low"},
     {"id":3, "text":"Использование многоразовой бутылки вместо одноразовых", "class":"low"},
@@ -30,7 +30,7 @@ QUESTIONS = [
     {"id":9, "text":"Закрывать кран во время чистки зубов, чтобы экономить воду", "class":"low"},
     {"id":10, "text":"Покупка техники с низким энергопотреблением", "class":"low"},
 
-    # СЕРЬЁЗНЫЕ (high)
+    # СЕРЬЁЗНЫЕ 
     {"id":11, "text":"Заводы, выбрасывающие тонны CO₂ в атмосферу", "class":"high"},
     {"id":12, "text":"ТЭС (тепловые электростанции) на угле", "class":"high"},
     {"id":13, "text":"Вырубка тропических лесов под плантации", "class":"high"},
@@ -63,6 +63,7 @@ def load_scores_simple():
             except:
                 continue
     return scores
+
 
 def save_scores_simple(scores):
     with open(SCORES_FILE, "w", encoding="utf-8") as f:
@@ -98,6 +99,7 @@ def cmd_start(message):
         "Привет! Я простая викторина про углеродный след.\n\n"
         "Команды:\n"
         "/quiz — начать новую игру (максимум 20 вопросов)\n\n"
+        "/profile — Статистика игрока\n\n"
         "После ответа бот сразу даёт следующий вопрос до тех пор, пока не будет отвечено 20 вопросов.\n"
         "После 20 вопросов вы получите итог: Победа (>=15) или Проигрыш (<15)."
     )
@@ -116,7 +118,14 @@ def cmd_quiz(message):
     text = format_question_text(initial_q, session["points"], session["answered"] + 1)
     bot.send_message(message.chat.id, text, reply_markup=make_keyboard(token))
 
-# команда /score удалена по требованию (не используется)
+#komanda /profile
+@bot.message_handler(commands=['profile'])
+def profile_handler(message):
+    uid = str(message.from_user.id)
+    scores = load_scores_simple()
+    rec = scores.get(uid)
+    text = f"ID telegram:{uid}|Ник игрока:{rec.get('name','')}|Всего верных ответов:{rec.get('points',0)}|Всего ответов на вопросы:{rec.get('attempts',0)}"
+    bot.send_message(message.chat.id, text)
 
 # ОБРАБОТКА ОТВЕТОВ (кнопки)
 @bot.callback_query_handler(func=lambda call: True)
@@ -194,4 +203,3 @@ def callback_handler(call):
 if __name__ == "__main__":
     print("Бот запущен...")
     bot.polling(none_stop=True)
-
